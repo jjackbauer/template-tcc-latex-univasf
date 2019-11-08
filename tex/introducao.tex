@@ -3,7 +3,6 @@
 %--------------------------------------------------------------------------------------
 \chapter{Introdução}
 
-%\lipsum[5-10]
 
 %Colocar citações longas entre \textbackslash begin\{citacao\} e \textbackslash end\{citacao\}, exemplo: 
 
@@ -14,20 +13,42 @@
 %\end{citacao}
 
 \section{Motivação}
+A decodificação da atividade cerebral tem diversas aplicações, dentre elas, estudos neurológicos e Interfaces Cérebro-Máquina (ICMs).
+As interfaces Cérebro-Máquina traduzem a atividade cerebral do usuário em tempo real para comandos destinados a um dispositivo externo. as abordagens não invasivas tem diversas aplicações como videogames, sistemas de comunicação ou reabilitação neurológica de pessoas com deficiência,\cite{halme2018across}.Contudo, segundo \cite{corsi2019integrating} ainda há muita incerteza na forma de se identificar uma estratégia para codificar a intenção do usuário e otimização das características de controle. Estes desafios são ainda mais evidentes quando, segundo \cite{vidaurre2010towards}, a taxa de usuários que não conseguem utilizar ICMs de forma adequada é de até 30\%, afetando principalmente as abordagens baseadas em Imagem Motora.
 
-%\lipsum[1]
 
+Ainda assim, as variações estruturais e funcionais do cérebro de indivíduos distintos torna árdua a tarefa de decodificar atividade cerebral entre diferentes sujeitos. Isso faz com que a abordagem de treinar um classificador com um grupo de indivíduos e depois testar com um grupo disjunto deste seja muitas vezes ineficiente como discutido em \cite{olivetti2014meg} e  \cite{Barachant}. Outra questão particular ao problema de criar e validar modelos para decodificação da atividade cerebral é a dificuldade de se obter leituras com boa razão sinal-ruído (SNR), o que torna os bancos de dados disponíveis escassos em relação à grande dimensionalidade dos sinais de interesse, \cite{varoquaux2017assessing}.
+
+O estado da arte da decodificação de sinais de magneto-encefalograma entre indivíduos ainda tem uma precisão muito baixa se comparada com outras aplicações que se utilizam se inteligência artificial. Essa baixa precisão faz com que as ICMs atuais ainda sejam em sua maioria protótipos testados em laboratórios, \cite{clerc2016brain2}. Logo, é de grande relevância o estudo de técnicas de validação dos classificadores utilizados, pois estas técnicas permitirão ter mais discernimento sobre o poder preditivo dos classificadores criados para decodificar sinais de MEG ou outros modos de imagem cerebral \cite{varoquaux2017assessing}.
+
+
+\section{Definição do problema}
+
+Dado um sinal magneto-encefalografia (MEG)$\overline{X}$, que é a amostra da atividade eletromagnética do cérebro de um indivíduo, capturado após um estímulo dentre duas classes diferentes. Este sinal é composto de vários canais, que cobrem à atividade cerebral da pessoa em uma malha, cujos nós medem a intensidade e variação do campo eletromagnético induzido pela atividade cerebral do indivíduo. A grandeza dos valores medidos é muito pequena, portanto os aparelhos devem ter uma alta sensibilidade (o que ocasiona uma baixa razão sinal-ruído na maioria das aquisições). Além disto, por causa dos vários canais e alta frequência de amostragem, os sinais de MEG tem uma alta dimensionalidade, o que torna mais difícil a obtenção de conhecimento através dos sinais de MEG.
+
+A abordagem mais comum para a decodificação de sinais de magneto-encefalografia consiste dos seguintes passos segundo \cite{nam2018brain}:
+\begin{itemize}
+    \item preprocessamento para diminuição de ruídos e decimação do sinal
+    \item extração de características mais relevantes do sinal
+    \item Criação de modelos de classificação
+    \item Validação de modelos de classificação
+    \item Classificação das instâncias não rotuladas
+\end{itemize}
+
+Todavia, validar modelos criados para decodificação de neuroimagem é uma tarefa árdua, pois há uma escassez de dados em relação à dimensionalidade inerente destes sistemas \cite{carroll2009prediction}. Este problema é ainda maior quando se trata da criação de um modelo de classificação que deve classificar a neuroimagem de indivíduos distintos. Geralmente, para obter a uma precisão maior de classificação é utilizada à técnica do Leave-one-out, \cite{Barachant} e \cite{olivetti2014meg}. Contudo, segundo \cite{varoquaux2017assessing} esta técnica leva a resultados instáveis e precisões maiores podem ser obtidas utilizando \textit{Repeated random splits}, divisões aleatórias repetidas, para validar aos classificadores treinados. 
 
 \section{Objetivos gerais}
-
-%\lipsum[1]
+Avaliar o efeito da escolha de algoritmos de validação de modelos e classificação na decodificação de sinais de MEG em bases de dados abertas e previamente utilizadas na literatura.
 
 \section{Objetivos específicos}
-
 \begin{itemize}
-	\item blablablabla;
-    \item blablablabla;
-    \item blablablabla.
+\item Avaliar o uso do Holdout como algoritmo de validação para decodificação de sinais de MEG entre indivíduos.
+\item Avaliar o uso do Leave-one-out como algoritmo de validação para decodificação de sinais de MEG entre indivíduos.
+\item Avaliar o uso do Repeated random splits como algoritmo de validação para decodificação de sinais de MEG entre indivíduos.
+\item Avaliar o uso do Regressão Logistica como algoritmo de classificação para decodificação de sinais de MEG entre indivíduos.
+\item Avaliar o uso do Random Forrest como algoritmo de classificação para decodificação de sinais de MEG entre indivíduos.
+\item Avaliar o uso do Support Vector Machines lineares e não-lineares como algoritmo de classificação para decodificação de sinais de MEG entre indivíduos.
+
 \end{itemize}
 
 \section{Organização do trabalho}
